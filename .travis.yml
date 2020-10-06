@@ -1,0 +1,19 @@
+language: c++
+compiler:
+  - python
+  - gcc
+env:
+  - CXX=g++
+  
+install:
+  - pip install meson ninja
+  
+script:
+  - meson builddir
+  - meson compile -C builddir
+  - meson test -C builddir
+
+branches:
+  only:
+  - master
+  - stable
