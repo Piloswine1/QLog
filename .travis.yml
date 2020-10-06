@@ -1,9 +1,5 @@
-language: c++
-compiler:
-  - python
-  - gcc
-env:
-  - CXX=g++
+os: linux
+language: python
   
 install:
   - pip install meson ninja
@@ -12,6 +8,13 @@ script:
   - meson builddir
   - meson compile -C builddir
   - meson test -C builddir
+
+matrix:
+  include:
+    language: c++
+    compiler: gcc    
+    env:
+      - CXX=g++
 
 branches:
   only:
