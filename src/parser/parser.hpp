@@ -4,6 +4,7 @@
 #include <regex>
 #include <algorithm>
 #include <iterator>
+#include <iostream>
 
 namespace QLog
 {
@@ -28,5 +29,6 @@ namespace QLog
          * т.е. %dtext%sblabla%d, но по мне тупо как то
          */
         static StringArrayWithTokens parse(const std::string& s);
+        static std::vector<std::string> parse_to_vec(const std::string& s);
     };
 }
