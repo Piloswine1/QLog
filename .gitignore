@@ -32,6 +32,10 @@ tags
 *.out
 *.app
 
+# QtCreator files
+QLog.*
+meson.build.*
+
 # Directories
 Debug/*
 Build/*

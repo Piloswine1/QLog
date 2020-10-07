@@ -8,8 +8,9 @@ namespace QLog
         std::vector<ParsedToken> _t;
         std::vector<std::string> _s;
         std::string no_tokens;
+        std::regex reg_tokens("");
         // парсим дата или строка должна идти здесь
-        auto parse_token = [&_t, &_s](const char &ch){
+        auto parse_token = [&_t](const char &ch){
             switch(ch) {
                 case 'd': return _t.push_back(ParsedToken::DATA);
                 case 's': return _t.push_back(ParsedToken::STRING);

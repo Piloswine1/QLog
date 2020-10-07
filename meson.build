@@ -19,7 +19,6 @@ warnings = [
 qchat_sources = files(
     'src/builder.cpp',
     'src/parser.cpp'
-    
 )
 
 incl_dir = include_directories(
@@ -27,10 +26,3 @@ incl_dir = include_directories(
 )
 
 subdir('tests')
-
-executable(
-    'Qlog',
-    qchat_sources,
-    include_directories: incl_dir,
-    cpp_args: warnings
-)
