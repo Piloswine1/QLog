@@ -10,11 +10,7 @@ namespace QLog
 {
     enum class ParsedToken { DATA, STRING };
 
-    struct StringArrayWithTokens
-    {
-        std::vector<ParsedToken> t;
-        std::vector<std::string>  s;
-    };
+    typedef std::pair<ParsedToken, std::string> StringWithTokens;
 
     struct Parser
     {
@@ -28,7 +24,7 @@ namespace QLog
          * мб лучше сразу в строку типо printf
          * т.е. %dtext%sblabla%d, но по мне тупо как то
          */
-        static StringArrayWithTokens parse(const std::string& s);
+        static std::vector<StringWithTokens> parse(const std::string& s);
         static std::vector<std::string> parse_to_vec(const std::string& s);
     };
 }
