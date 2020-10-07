@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-namespace Qlog
+namespace QLog
 {
     enum class LogLevel { OFF, FATAL, ERROR, WARN, DEBUG, INFO, ALL }; 
 

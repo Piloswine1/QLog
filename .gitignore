@@ -6,6 +6,7 @@
 *.lo
 *.o
 *.obj
+tags
 
 # Precompiled Headers
 *.gch
@@ -38,3 +39,5 @@ Release/*
 build/*
 builddir/*
 .vscode/
+.idea/
+

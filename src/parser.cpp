@@ -1,6 +1,6 @@
 #include "parser.hpp"
 
-namespace Qlog
+namespace QLog
 {
 
     StringArrayWithTokens Parser::parse(const std::string& s)

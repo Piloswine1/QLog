@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <iterator>
 
-namespace Qlog
+namespace QLog
 {
     enum class ParsedToken { DATA, STRING };
 
