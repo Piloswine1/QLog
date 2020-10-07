@@ -1,25 +1,14 @@
-project('Qlog',
-        'cpp', 
-        license: 'GPL3',
-        version: '0.0.1',
-        default_options: [
-            'cpp_std=c++17'
-        ],
+project(
+    'Qlog',
+    'cpp', 
+    license: 'GPL3',
+    version: '0.0.1',
+    default_options: [
+        'cpp_std=c++17'
+    ],
 )
 
-qchat_sources = files(
-    'src/builder.cpp',
-    
-)
+inc_dirs = include_directories('include')
 
-incl_dir = include_directories(
-    'src'
-)
-
+subdir('src')
 subdir('tests')
-
-executable('Qlog',
-            qchat_sources,
-            include_directories: incl_dir,
-            cpp_args: 
-            )

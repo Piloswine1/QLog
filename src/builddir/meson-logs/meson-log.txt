@@ -1,0 +1,11 @@
+Build started at 2020-10-07T16:16:33.146944
+Main binary: /usr/bin/python
+Build Options: 
+Python system: Linux
+The Meson build system
+Version: 0.55.3
+Source dir: /home/pilo/proj/QLog/src
+Build dir: /home/pilo/proj/QLog/src/builddir
+Build type: native build
+
+ERROR: First statement must be a call to project

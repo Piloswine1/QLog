@@ -6,6 +6,7 @@
 *.lo
 *.o
 *.obj
+tags
 
 # Precompiled Headers
 *.gch
@@ -31,6 +32,10 @@
 *.out
 *.app
 
+# QtCreator files
+QLog.*
+meson.build.*
+
 # Directories
 Debug/*
 Build/*
@@ -38,3 +43,5 @@ Release/*
 build/*
 builddir/*
 .vscode/
+.idea/
+

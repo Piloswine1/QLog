@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-namespace Qlog
+namespace QLog
 {
     enum class LogLevel { OFF, FATAL, ERROR, WARN, DEBUG, INFO, ALL }; 
 
@@ -13,14 +13,14 @@ namespace Qlog
         virtual ~LoggerBase();
 
         private: 
-            std::vector<std::pair<std::ostream, LogLevel>> _outputs = {};
+            std::vector<std::pair<std::ostream, LogLevel>> _outputs;
             /**
              * TODO: add some default
              * like "#d #s #n" 
              * #d - date, #s - string, #n - number, ...
              * ? maybe some struct?
              */
-            std::string _format = "";
+            std::string _format;
     };
 
     struct Logger: public LoggerBase
@@ -72,6 +72,6 @@ namespace Qlog
              */            
             void set_callbacks();
             //TODO: build Logger
-            Logger build() {return std::move(Logger());};
+            // Logger build() {return std::move(Logger());};
     };
 }
