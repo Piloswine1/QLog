@@ -10,25 +10,30 @@ namespace QLog
 {
     enum class ParsedToken { DATA, STRING };
 
-    struct StringArrayWithTokens
+    struct Parsed
     {
-        std::vector<ParsedToken> t;
-        std::vector<std::string>  s;
+       std::vector<ParsedToken> tokens;
+       std::vector<std::string> strings;
     };
 
     struct Parser
     {
         Parser() = delete;
         /**
+         * @deprecated
+         */
+        static std::vector<ParsedToken> parse_to_vec(const std::string& s);
+        /**
          * @return структура с токенами и строками
          * {
          *  t { DATA, STRING, DATA}
-         *  s {"", "text", "blalba"} 
+         *  s {"", "text", "blalba"}
          * }
          * мб лучше сразу в строку типо printf
          * т.е. %dtext%sblabla%d, но по мне тупо как то
          */
-        static StringArrayWithTokens parse(const std::string& s);
-        static std::vector<std::string> parse_to_vec(const std::string& s);
+        static Parsed parse(const std::string& s);
+    private:
+        static ParsedToken _assign_type(const std::string &_s);
     };
 }
