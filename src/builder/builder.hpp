@@ -1,45 +1,47 @@
-#include <vector>
-#include <utility>
+#include <fstream>
 #include <iostream>
-#include <string>
+#include <variant>
+#include <algorithm>
+#include <vector>
+#include <memory>
 
 namespace QLog
 {
-    enum class LogLevel { OFF, FATAL, ERROR, WARN, DEBUG, INFO, ALL }; 
+    enum class LogLevel { OFF, FATAL, ERROR, WARN, DEBUG, INFO, ALL };
 
     struct LoggerBase
     {
+        typedef std::pair<std::shared_ptr<std::ostream*>, LogLevel> LogOutput;
         LoggerBase();
         virtual ~LoggerBase();
 
-        private: 
-            std::vector<std::pair<std::ostream, LogLevel>> _outputs;
-            /**
-             * TODO: add some default
-             * like "#d #s #n" 
-             * #d - date, #s - string, #n - number, ...
-             * ? maybe some struct?
-             */
-            std::string _format;
+        protected:
+            const std::array<std::string, 7> LogLevelNames = { "OFF", "FATAL", "ERROR", "WARN", "DEBUG", "INFO", "ALL"};
+            LogLevel LogEnumFromString(const std::string &s) const;
+            void _close_outputs();
+            std::vector<LogOutput> _outputs;
     };
 
     struct Logger: public LoggerBase
     {
         Logger() = default;
-        ~Logger() = default;
+        Logger(const LoggerBase &l): LoggerBase(l) {};
 
         public:
-            void invoke();
+        template<typename ...T>
+            void invoke(const T &...args) const;
             /**
              * TODO int or LogLevel m.b. typecast
              */
             void supress_to_level();
+        private:
+            void _invoke_impl();
+            void _invoke_impl(const std::string &s);
     };
 
     struct LogBuilder: public LoggerBase
     {
         LogBuilder() = default;
-        ~LogBuilder() = default;
 
         public:
             /**
@@ -48,10 +50,11 @@ namespace QLog
              * @param print: string or vector?
              * @param format: json/plaintext/csv/... in own modules
              */
-            void set_format();
+
+            LogBuilder& set_format(const std::string &s);
             /**
              *TODO: Make generics
-             *    set_outputs(
+             *    add_outputs(
              *        {
              *            {std::out, LogLevel::All},
              *            {std::fsoutput::open("warn.log"), LogLevel::Warn},
@@ -60,7 +63,9 @@ namespace QLog
              *        }
              *    )
              */
-            void set_outputs();
+
+            template<typename ...T>
+            LogBuilder& add_output(const T &...args);
             /**
              *TODO: Make generics
              *    set_callback(
@@ -72,6 +77,17 @@ namespace QLog
              */            
             void set_callbacks();
             //TODO: build Logger
-            // Logger build() {return std::move(Logger());};
+            Logger build();
+
+            const std::vector<LogOutput>& get_outputs() const noexcept;
+
+        private:
+            void _parse_output();
+            void _parse_output(const std::string &s);
+            void _parse_output(std::ostream *s);
+            void _parse_output(const std::pair<std::string, std::string> &t);
+            void _parse_output(const std::pair<std::string, LogLevel> &t);
+            void _parse_output(const std::pair<std::ostream*, LogLevel> &t);
+            void _parse_output(std::ostream *s, const LogLevel &l);
     };
 }

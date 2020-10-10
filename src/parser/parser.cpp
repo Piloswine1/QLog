@@ -7,7 +7,6 @@ Parsed Parser::parse(const std::string &s)
 {
     std::vector<ParsedToken> tokens;
     std::vector<std::string> strings;
-    // надо подумать, что б более эффективно, без реаллокации
     int _pos = 0;
 
     const std::regex reg_tokens("#(d|s)");
