@@ -44,6 +44,11 @@ namespace QLog
         return *this;
     }
 
+//    LogBuilder &LogBuilder::add_output(const std::string &s)
+//    {
+//        return *this;
+//    }
+
     Logger LogBuilder::build()
     {
         return std::move(*this);
@@ -96,9 +101,10 @@ namespace QLog
     LogBuilder& LogBuilder::add_output(const T &...args)
     {
 //        [](){}(_parse_output(args)...); //LOL вроде даже работает
-        for(const auto &v: {args...}) {
+        for(auto v: {args...}) {
             _parse_output(v);
         }
+//        _parse_output(args);
         return *this;
     }
 
@@ -106,6 +112,12 @@ namespace QLog
     void Logger::invoke(const T &...args) const
     {
         _invoke_impl(args...);
+    }
+
+    template<typename ...T>
+    void LogBuilder::_parse_output(const T &...val)
+    {
+        throw std::invalid_argument("not available arg");
     }
 
 }

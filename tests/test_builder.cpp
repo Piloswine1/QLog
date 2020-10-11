@@ -4,12 +4,12 @@
 TEST(builder, builder_outpust)
 {
     typedef QLog::LogLevel LL;
-    auto builder = QLog::LogBuilder();
-    auto logger = builder.set_format("#d some #s text #d")
+    QLog::LogBuilder b;
+    auto logger = b.set_format("#d some #s text #d")
             .add_output(
-                "test.log",
-                std::pair("test2.log", LL::WARN)
-                )
+                std::string("test.log"),
+                std::pair(std::string("test2.log"), LL::DEBUG)
+            )
             .build();
 //    logger.invoke();
     ASSERT_TRUE(false);

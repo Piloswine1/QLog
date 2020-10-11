@@ -35,5 +35,10 @@ include_directories(${GTestIncludes})
 add_executable(test_parser test_parser.cpp
                ${GTestFiles})
 
+add_executable(test_builder test_builder.cpp
+               ${GTestFiles})
+
 add_test(NAME test_parser COMMAND test_parser)
+add_test(NAME test_builder COMMAND test_builder)
 target_link_libraries(test_parser PRIVATE Threads::Threads parser)
+target_link_libraries(test_builder PRIVATE Threads::Threads builder)

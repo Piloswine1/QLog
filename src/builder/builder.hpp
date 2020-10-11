@@ -66,6 +66,10 @@ namespace QLog
 
             template<typename ...T>
             LogBuilder& add_output(const T &...args);
+
+
+
+//            LogBuilder& add_output(const std::string &s);
             /**
              *TODO: Make generics
              *    set_callback(
@@ -83,6 +87,8 @@ namespace QLog
 
         private:
             void _parse_output();
+            template<typename ...T>
+            void _parse_output(const T &...val);
             void _parse_output(const std::string &s);
             void _parse_output(std::ostream *s);
             void _parse_output(const std::pair<std::string, std::string> &t);
