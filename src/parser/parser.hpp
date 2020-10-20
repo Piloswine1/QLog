@@ -6,24 +6,24 @@
 #include <iterator>
 #include <iostream>
 
-namespace QLog
+namespace QLog {
+enum class ParsedToken { DATA,
+  STRING };
+
+struct Parsed
 {
-    enum class ParsedToken { DATA, STRING };
+  std::vector<ParsedToken> tokens;
+  std::vector<std::string> strings;
+};
 
-    struct Parsed
-    {
-       std::vector<ParsedToken> tokens;
-       std::vector<std::string> strings;
-    };
-
-    struct Parser
-    {
-        Parser() = delete;
-        /**
+struct Parser
+{
+  Parser() = delete;
+  /**
          * @deprecated
          */
-        static std::vector<ParsedToken> parse_to_vec(const std::string& s);
-        /**
+  static std::vector<ParsedToken> parse_to_vec(const std::string &s);
+  /**
          * @return структура с токенами и строками
          * {
          *  t { DATA, STRING, DATA}
@@ -32,8 +32,9 @@ namespace QLog
          * мб лучше сразу в строку типо printf
          * т.е. %dtext%sblabla%d, но по мне тупо как то
          */
-        static Parsed parse(const std::string& s);
-    private:
-        static ParsedToken _assign_type(const std::string &_s);
-    };
-}
+  static Parsed parse(const std::string &s);
+
+private:
+  static ParsedToken _assign_type(const std::string &_s);
+};
+}// namespace QLog

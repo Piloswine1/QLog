@@ -10,7 +10,7 @@ test('parser_related_tests', test_parser, protocol: 'gtest')
 test_builder = executable(
         'test_builder',
         sources: ['test_builder.cpp'],
-        dependencies: [gtest_dep, builder_dep]
+        dependencies: [gtest_dep, builder_dep],
 )
 test('builder_related_tests', test_builder, protocol: 'gtest')
 

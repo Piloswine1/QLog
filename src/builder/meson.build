@@ -10,6 +10,7 @@ _l = library('builder',
 )
 
 builder_dep = declare_dependency(
-	include_directories: _i,
-	link_with: _l
+        include_directories: _i,
+        sources: _f,
+        link_with: _l
 )
